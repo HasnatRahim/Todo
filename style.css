@@ -1,0 +1,277 @@
+:root {
+    --primary-color: #181C14;
+    --secondary-color: #3C3D37;
+    --accent-color: #697565;
+    --accent-hover: #5a4d4d;
+    --text-color: #ECDFCC;
+    --text-lite: #ecdfcc84;
+    --text-hover: #ffc089;
+}
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+h3 {
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+  
+button {
+    padding: 2px 2px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: .2s ease;
+}
+  
+button:hover {
+    background-color: var(--text-hover);
+}
+  
+button img {
+    height: 100%;
+    width: 100%;
+}
+  
+body {
+    color: white;
+    background-color: var(--primary-color);
+    font-family: poppins;
+    margin-top: 5vh;
+}
+  
+#heading,
+button,
+h3,
+span {
+    color: var(--text-color);
+}
+  
+main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+  
+#heading {
+    text-align: center;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+  
+form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: 90%;
+    max-width: 640px;
+    height: 45px;
+    margin-bottom: 15px;
+}
+  
+form input {
+    padding: 5px 8px;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--text-hover);
+    font-size: 1.2rem;
+    color: var(--text-color);
+    padding-right: 50px;
+}
+  
+form input:focus {
+    border: 1px solid var(--text-color);
+}
+  
+form button {
+    position: absolute;
+    right: 5px;
+    height: 35px;
+    width: 35px;
+}
+  
+#task-container {
+    max-height: 100%;
+    width: 90%;
+    max-width: 640px;
+}
+  
+.list-wrapper {
+    min-height: 40px;
+    max-height: auto;
+    width: 100%;
+    background-color: var(--secondary-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid var(--text-lite);
+    padding: 5px 8px;
+    margin: 5px;
+    gap: 40px;
+}
+  
+.list-wrapper .text-sec {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow-wrap: break-word;
+    max-width: calc(100% - 80px);
+}
+  
+.list-wrapper .btn-sec {
+    position: absolute;
+    right: 7px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 0;
+}
+  
+.list-wrapper button {
+    height: 100%;
+    width: 34px;
+}
+  
+.done {
+    opacity: .3;
+}
+  
+#clear-btn {
+    color: var(--text-color);
+    background-color: var(--accent-color);
+    padding: 8px 10px;
+    font-size: 1.1rem;
+    margin: 10px 20px 10px 20px;
+    transform: scale(.8);
+}
+  
+#clear-btn:hover {
+    background-color: var(--accent-hover);
+}
+  
+
+@media (max-width: 768px) {
+    #heading {
+        font-size: 1.5rem;
+    }
+  
+    form {
+        width: 90%;
+        max-width: 100%;
+    }
+  
+    #task-container {
+        width: 90%;
+    }
+  
+    .list-wrapper {
+        width: 100%;
+        padding: 10px;
+    }
+  
+    #clear-btn {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+  
+@media (max-width: 480px) {
+    form input {
+        font-size: 1rem;
+    }
+  
+    button img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .list-wrapper button {
+        width: 30px;
+    } 
+  
+    #clear-btn {
+        font-size: 0.9rem;
+    }
+}
+  
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+@keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Keyframes for fade-out animation when deleting a task */
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  /* Apply animation for new tasks */
+  .list-wrapper {
+    min-height: 40px;
+    max-height: auto;
+    width: 100%;
+    background-color: var(--secondary-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid var(--text-lite);
+    padding: 5px 8px;
+    margin: 5px;
+    gap: 40px;
+    animation: slideIn 0.4s ease-out;
+  }
+  
+  /* Animation for task completion (fading when done) */
+  .list-wrapper.done {
+    opacity: 0.5;
+    transform: scale(0.95);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  /* Fade-out animation on delete */
+  .list-wrapper.delete {
+    animation: fadeOut 0.5s forwards;
+  }
+  
+  .list-wrapper.delete button {
+    pointer-events: none;  /* Disable buttons during delete animation */
+  }

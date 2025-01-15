@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <title>Todo List</title>
+  </head>
+
+  <body>
+    <h1 id="heading" class="text-4xl"></h1>
+    <main
+      id="main"
+      class="flex justify-center item-center flex-col h-screen w-full"
+    >
+      <form id="form">
+        <input
+          autocomplete="off"
+          type=""
+          name=""
+          id="add-inp"
+          placeholder="Add New Task"
+          required
+        />
+        <button type="submit"><img src="icon/circle plus.svg" alt="" /></button>
+      </form>
+      <h3>Your To-Do List</h3>
+      <div id="task-container">
+      </div>
+      <button id="clear-btn">Clear & Jump to The Next Project?
+      </button>
+    </main>
+    <script src="script.js">
+    </script>
+  </body>
+</html>
