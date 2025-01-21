@@ -6,15 +6,29 @@ const submitBtn = document.querySelector("button[type='submit']");
 const deleteBtn = document.querySelector(".delete");
 const clearBtn = document.querySelector("#clear-btn");
 const doneBtn = document.querySelector(".done");
+// let tasks = JSON.parse(localStorage.getItem("task")) || []
 
+
+
+
+// tasks.forEach(function (task){
+// console.log(task.txt);
+
+// });
 function headFill() {
-  const headingPrompt = prompt("Your New Project Name");
-  if (headingPrompt !== null && headingPrompt.trim() !== "" && headingPrompt ) {
-    let headingValue = headingPrompt.toUpperCase();
-    heading.innerHTML = headingValue;
+  let headingValue = localStorage.getItem("projectName");
+  if (!headingValue) {
+    const headingPrompt = prompt("Your New Project Name");
+    if (headingPrompt && headingPrompt.trim() !== "") {
+      headingValue = headingPrompt.toUpperCase();
+      heading.innerHTML = headingValue.trim();
+      localStorage.setItem("projectName", headingValue);
+    } else {
+      heading.innerHTML = "Refresh! I Asked Something.";
+      main.style.display = "none";
+    }
   } else {
-    heading.innerHTML = "Refresh! I Asked Something.";
-    main.style.display = "none";
+    heading.innerHTML = headingValue.trim();
   }
 }
 
@@ -29,6 +43,12 @@ addForm.addEventListener("submit", function (e) {
   </div>`;
   taskContainer.insertAdjacentHTML("beforeend", tempHtml);
   document.getElementById("add-inp").value = "";
+  // let newTask = {
+  //   txt: addInput,
+  //   isDone: false
+  // }
+  // tasks.push(newTask)
+  saveTask()
 });
 
 function checkHeading() {
@@ -37,32 +57,41 @@ function checkHeading() {
   }
 }
 
-
 taskContainer.addEventListener("click", function (e) {
   let eDiv = e.target.closest(".list-wrapper");
-
   if (eDiv) {
-    if (e.target.closest(".done-btn")){ 
+    if (e.target.closest(".done-btn")) {
       eDiv.classList.add("done");
-    const img = e.target.closest(".done-btn").querySelector(".img");
-    if (img) {
-      img.src = "icon/double-tick.svg";
-    }}
-
-    if(e.target.closest(".delete")){
+      const img = e.target.closest(".done-btn").querySelector(".img");
+      if (img) {
+        img.src = "icon/double-tick.svg";
+      }
+    }
+    if (e.target.closest(".delete")) {
       eDiv.remove();
     }
-
-  }}
-);
+  }
+  saveTask()
+});
 
 function clearAll() {
   taskContainer.innerHTML = "";
   setTimeout(() => {
     headFill();
-  }, 0);
+  }, 100);
+  localStorage.clear();
 }
 
 
-clearBtn.addEventListener('click', clearAll)
-headFill()
+function saveTask(){
+  localStorage.setItem("tasks", taskContainer.innerHTML)
+}
+function displayTask(){
+  taskContainer.innerHTML = localStorage.getItem("tasks");
+}
+
+
+// localStorage.setItem("task", JSON.stringify(tasks));
+clearBtn.addEventListener("click", clearAll);
+headFill();
+displayTask()
