@@ -61,7 +61,7 @@ taskContainer.addEventListener("click", function (e) {
   let eDiv = e.target.closest(".list-wrapper");
   if (eDiv) {
     if (e.target.closest(".done-btn")) {
-      eDiv.classList.add("done");
+      eDiv.classList.toggle("done");
       const img = e.target.closest(".done-btn").querySelector(".img");
       if (img) {
         img.src = "icon/double-tick.svg";
