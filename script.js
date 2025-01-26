@@ -65,6 +65,12 @@ taskContainer.addEventListener("click", function (e) {
       const img = e.target.closest(".done-btn").querySelector(".img");
       if (img) {
         img.src = "icon/double-tick.svg";
+        if(img.src = eDiv.classList.contains("done")){
+          img.src = "icon/double-tick.svg";
+        }
+        else{
+          img.src = "icon/single-tick.svg";
+        }
       }
     }
     if (e.target.closest(".delete")) {
